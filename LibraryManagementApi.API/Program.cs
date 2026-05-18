@@ -4,6 +4,9 @@ using LibraryManagementApi.API.Repositories;
 using LibraryManagementApi.API.Repositories.Interfaces;
 using LibraryManagementApi.API.Services;
 using LibraryManagementApi.API.Services.Interfaces;
+using FluentValidation;
+using FluentValidation.AspNetCore;
+using LibraryManagementApi.API.Validators;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,6 +21,9 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IBookRepository, BookRepository>();
 builder.Services.AddScoped<IBookService, BookService>();
+
+builder.Services.AddFluentValidationAutoValidation();
+builder.Services.AddValidatorsFromAssemblyContaining<CreateBookDtoValidator>();
 
 var app = builder.Build();
 
