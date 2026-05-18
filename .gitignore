@@ -1,6 +1,7 @@
 # Build
 bin/
 obj/
+.vs/
 
 # Visual Studio
 .vs/
@@ -22,3 +23,6 @@ Thumbs.db
 
 # EF Core
 Migrations/*.Designer.cs
+
+# AppSettings
+appsettings.Development.json
