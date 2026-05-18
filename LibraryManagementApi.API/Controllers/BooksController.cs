@@ -1,6 +1,7 @@
 ﻿using LibraryManagementApi.API.DTOs;
 using LibraryManagementApi.API.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using LibraryManagementApi.API.Common;
 
 namespace LibraryManagementApi.API.Controllers;
 
@@ -27,7 +28,11 @@ public class BooksController : ControllerBase
             pageSize,
             cancellationToken);
 
-        return Ok(books);
+        return Ok(
+    ApiResponse<IEnumerable<BookResponseDto>>
+        .SuccessResponse(
+            books,
+            "Books retrieved successfully"));
     }
 
     [HttpGet("{id}")]
@@ -46,7 +51,11 @@ public class BooksController : ControllerBase
             return NotFound();
         }
 
-        return Ok(book);
+        return Ok(
+    ApiResponse<BookResponseDto>
+        .SuccessResponse(
+            book,
+            "Book retrieved successfully"));
     }
 
     [HttpPost]
@@ -63,7 +72,10 @@ public class BooksController : ControllerBase
         return CreatedAtAction(
             nameof(GetById),
             new { id = createdBook.Id },
-            createdBook);
+            ApiResponse<BookResponseDto>
+    .SuccessResponse(
+        createdBook,
+        "Book created successfully"));
     }
 
     [HttpPut("{id}")]
