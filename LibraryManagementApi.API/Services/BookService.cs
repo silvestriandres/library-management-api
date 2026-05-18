@@ -16,9 +16,10 @@ public class BookService : IBookService
 
     public async Task<IEnumerable<BookResponseDto>> GetAllAsync()
     {
-        var books = await _repository.GetAllAsync();
 
-        return books.Select(MapToResponseDto);
+        throw new Exception("Test exception middleware");
+        //var books = await _repository.GetAllAsync(page, pageSize);
+        //return books.Select(MapToResponseDto);
     }
 
     public async Task<BookResponseDto?> GetByIdAsync(int id)

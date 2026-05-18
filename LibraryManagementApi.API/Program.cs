@@ -7,6 +7,7 @@ using LibraryManagementApi.API.Services.Interfaces;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using LibraryManagementApi.API.Validators;
+using LibraryManagementApi.API.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -37,6 +38,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+app.UseMiddleware<ExceptionMiddleware>();
 
 app.MapControllers();
 
