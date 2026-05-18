@@ -14,36 +14,58 @@ public class BookRepository : IBookRepository
         _context = context;
     }
 
-    public async Task<IEnumerable<Book>> GetAllAsync()
+    public async Task<IEnumerable<Book>> GetAllAsync(
+        int page,
+        int pageSize,
+        CancellationToken cancellationToken)
     {
-        return await _context.Books.ToListAsync();
+        return await _context.Books
+            .AsNoTracking()
+            .OrderBy(b => b.Id)
+            .Skip((page - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync(cancellationToken);
     }
 
-    public async Task<Book?> GetByIdAsync(int id)
+    public async Task<Book?> GetByIdAsync(
+        int id,
+        CancellationToken cancellationToken)
     {
-        return await _context.Books.FindAsync(id);
+        return await _context.Books
+            .AsNoTracking()
+            .FirstOrDefaultAsync(
+                b => b.Id == id,
+                cancellationToken);
     }
 
-    public async Task<Book> CreateAsync(Book book)
+    public async Task<Book> CreateAsync(
+        Book book,
+        CancellationToken cancellationToken)
     {
-        _context.Books.Add(book);
+        await _context.Books.AddAsync(
+            book,
+            cancellationToken);
 
-        await _context.SaveChangesAsync();
+        await _context.SaveChangesAsync(cancellationToken);
 
         return book;
     }
 
-    public async Task UpdateAsync(Book book)
+    public async Task UpdateAsync(
+        Book book,
+        CancellationToken cancellationToken)
     {
         _context.Books.Update(book);
 
-        await _context.SaveChangesAsync();
+        await _context.SaveChangesAsync(cancellationToken);
     }
 
-    public async Task DeleteAsync(Book book)
+    public async Task DeleteAsync(
+        Book book,
+        CancellationToken cancellationToken)
     {
         _context.Books.Remove(book);
 
-        await _context.SaveChangesAsync();
+        await _context.SaveChangesAsync(cancellationToken);
     }
 }

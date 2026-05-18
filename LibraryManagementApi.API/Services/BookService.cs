@@ -14,22 +14,35 @@ public class BookService : IBookService
         _repository = repository;
     }
 
-    public async Task<IEnumerable<BookResponseDto>> GetAllAsync()
+    public async Task<IEnumerable<BookResponseDto>> GetAllAsync(
+        int page,
+        int pageSize,
+        CancellationToken cancellationToken)
     {
+        var books = await _repository.GetAllAsync(
+            page,
+            pageSize,
+            cancellationToken);
 
-        throw new Exception("Test exception middleware");
-        //var books = await _repository.GetAllAsync(page, pageSize);
-        //return books.Select(MapToResponseDto);
+        return books.Select(MapToResponseDto);
     }
 
-    public async Task<BookResponseDto?> GetByIdAsync(int id)
+    public async Task<BookResponseDto?> GetByIdAsync(
+        int id,
+        CancellationToken cancellationToken)
     {
-        var book = await _repository.GetByIdAsync(id);
+        var book = await _repository.GetByIdAsync(
+            id,
+            cancellationToken);
 
-        return book is null ? null : MapToResponseDto(book);
+        return book is null
+            ? null
+            : MapToResponseDto(book);
     }
 
-    public async Task<BookResponseDto> CreateAsync(CreateBookDto dto)
+    public async Task<BookResponseDto> CreateAsync(
+        CreateBookDto dto,
+        CancellationToken cancellationToken)
     {
         var book = new Book
         {
@@ -40,14 +53,21 @@ public class BookService : IBookService
             AvailableCopies = dto.AvailableCopies
         };
 
-        var createdBook = await _repository.CreateAsync(book);
+        var createdBook = await _repository.CreateAsync(
+            book,
+            cancellationToken);
 
         return MapToResponseDto(createdBook);
     }
 
-    public async Task<bool> UpdateAsync(int id, UpdateBookDto dto)
+    public async Task<bool> UpdateAsync(
+        int id,
+        UpdateBookDto dto,
+        CancellationToken cancellationToken)
     {
-        var existingBook = await _repository.GetByIdAsync(id);
+        var existingBook = await _repository.GetByIdAsync(
+            id,
+            cancellationToken);
 
         if (existingBook is null)
         {
@@ -60,21 +80,29 @@ public class BookService : IBookService
         existingBook.PublishedYear = dto.PublishedYear;
         existingBook.AvailableCopies = dto.AvailableCopies;
 
-        await _repository.UpdateAsync(existingBook);
+        await _repository.UpdateAsync(
+            existingBook,
+            cancellationToken);
 
         return true;
     }
 
-    public async Task<bool> DeleteAsync(int id)
+    public async Task<bool> DeleteAsync(
+        int id,
+        CancellationToken cancellationToken)
     {
-        var existingBook = await _repository.GetByIdAsync(id);
+        var existingBook = await _repository.GetByIdAsync(
+            id,
+            cancellationToken);
 
         if (existingBook is null)
         {
             return false;
         }
 
-        await _repository.DeleteAsync(existingBook);
+        await _repository.DeleteAsync(
+            existingBook,
+            cancellationToken);
 
         return true;
     }

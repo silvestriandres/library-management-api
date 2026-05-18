@@ -4,13 +4,24 @@ namespace LibraryManagementApi.API.Repositories.Interfaces;
 
 public interface IBookRepository
 {
-    Task<IEnumerable<Book>> GetAllAsync();
+    Task<IEnumerable<Book>> GetAllAsync(
+        int page,
+        int pageSize,
+        CancellationToken cancellationToken);
 
-    Task<Book?> GetByIdAsync(int id);
+    Task<Book?> GetByIdAsync(
+        int id,
+        CancellationToken cancellationToken);
 
-    Task<Book> CreateAsync(Book book);
+    Task<Book> CreateAsync(
+        Book book,
+        CancellationToken cancellationToken);
 
-    Task UpdateAsync(Book book);
+    Task UpdateAsync(
+        Book book,
+        CancellationToken cancellationToken);
 
-    Task DeleteAsync(Book book);
+    Task DeleteAsync(
+        Book book,
+        CancellationToken cancellationToken);
 }
