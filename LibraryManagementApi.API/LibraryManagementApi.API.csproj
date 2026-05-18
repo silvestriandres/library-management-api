@@ -26,7 +26,6 @@
 		<Folder Include="Data\Configurations\" />
 		<Folder Include="Middleware\" />
 		<Folder Include="Validators\" />
-		<Folder Include="Repositories\Interfaces\" />
 		<Folder Include="Services\Interfaces\" />
 	</ItemGroup>
 
