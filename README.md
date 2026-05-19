@@ -56,7 +56,7 @@ Además de los requisitos mínimos, se intentó sumar varios puntos que suelen v
 ## Clonar repositorio
 
 ```bash
-git clone <URL_DEL_REPO>
+git clone https://github.com/silvestriandres/library-management-api
 ```
 
 ## Posicionarse en la solución
@@ -107,36 +107,6 @@ docker ps
 ## Ejecutar Docker Compose
 
 Desde la raiz de la solución:
-
-```bash
-docker compose up --build
-```
-
----
-
-## Acceder a Swagger
-
-```plaintext
-http://localhost:5000/swagger
-```
-
----
-
-# Cómo levantar con Docker
-
-## Tener Docker Desktop levantado
-
-Verificar:
-
-```bash
-docker ps
-```
-
----
-
-## Ejecutar Docker Compose
-
-Desde la raíz de la solución:
 
 ```bash
 docker compose up --build
