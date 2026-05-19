@@ -4,7 +4,7 @@ API REST desarrollada en .NET 8 para la gestión de libros de biblioteca.
 
 El proyecto fue realizado como parte de un challenge técnico orientado a backend development utilizando ASP.NET Core, Entity Framework Core y SQL Server.
 
-La idea principal fue no solamente cumplir con el CRUD solicitado, sino también intentar construir una solución prolija, mantenible y relativamente cercana a un entorno real de desarrollo, evitando tanto el código “tirado” como la sobreingeniería innecesaria para un challenge de este tamaño.
+La idea principal fue no solamente cumplir con el CRUD solicitado, sino también intentar construir una solución prolija, mantenible y relativamente cercana a un entorno real de desarrollo, evitando la sobreingeniería innecesaria para un challenge de este tamaño.
 
 ---
 
